@@ -19,7 +19,8 @@ from tkinter.filedialog import askopenfilename
 
 # Read in file
 # To be changed.
-filename = askopenfilename() # Open .fit file
+fPath = 'C:\\Users\\eric.honert\\Boa Technology Inc\\PFL Team - General\\Testing Segments\\Snow Performance\\SkiValidation_Dec2022\\GPS\\'
+filename = askopenfilename(initialdir = fPath) # Open .fit file
 # Preallocate
 TopSpeed = []
 
@@ -50,10 +51,11 @@ for jj in peak_loc[1:]:
     idx = df.speed[jj-30:jj+30] > 2
     # Find where the subject is skiing
     start_ski = np.where(idx==True)[0][0]+jj-30
-    idx = df.distance[start_ski:]-df.distance[start_ski] < 500 # Look at 500 m of skiing
+    idx = df.distance[start_ski:]-df.distance[start_ski] < 400 # Look at 500 m of skiing
     ski_idx = np.where(idx==True)[0] + start_ski
     TopSpeed.append(max(df.speed[ski_idx]))
 
+print('Average Top Speed', round(np.mean(TopSpeed)*2.23694),'mph')
 print('Subject"s top speed from each lap ranged from:')
 print(round(min(TopSpeed)*2.23694),'to',round(max(TopSpeed)*2.23694),'mph')
   

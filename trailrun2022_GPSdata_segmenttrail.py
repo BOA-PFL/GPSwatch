@@ -17,7 +17,7 @@ import addcopyfighandler
 
 # Read in files
 # only read .asc files for this work
-fPath = 'C:\\Users\eric.honert\\Boa Technology Inc\\PFL Team - General\\Testing Segments\\EndurancePerformance\\TrailRun_2022\\WatchData\\fitFiles\\'
+fPath = 'C:\\Users\eric.honert\\Boa Technology Inc\\PFL Team - General\\Testing Segments\\EndurancePerformance\\EH_Trail_HeelLockTrail_Perf_May23\\Watch\\'
 # fPath = 'C:\\Users\\eric.honert\\OneDrive - Boa Technology Inc\\Documents\\Projects\\2022_TrialRun\\TestData\GPS\\'
 fileExt = r".fit"
 entries = [fName for fName in os.listdir(fPath) if fName.endswith(fileExt)]
@@ -48,9 +48,9 @@ for ii in range(0,len(entries)):
     # Load the selected fit file
     fitfile = FitFile(fPath+entries[ii])
     # Extract file information
-    Subject.append(entries[ii].split(sep = "_")[0])
-    Config.append(entries[ii].split(sep = "_")[1])
-    Sesh.append(entries[ii].split(sep = "_")[2][0])
+    # Subject.append(entries[ii].split(sep = "_")[0])
+    # Config.append(entries[ii].split(sep = "_")[1])
+    # Sesh.append(entries[ii].split(sep = "_")[2][0])
     #__________________________________________________________________________
     # Extract the fitfile information into dataframe (df)
     while True:
