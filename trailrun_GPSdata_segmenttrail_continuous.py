@@ -12,10 +12,10 @@ from fitparse import FitFile
 import pandas as pd
 import numpy as np
 from datetime import datetime
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import os
 import time
-import addcopyfighandler
+#import addcopyfighandler
 
 # Read in the .fit files
 fPath = 'Z:\\Testing Segments\\EndurancePerformance\\EH_Trail_HeelLockTrail_Perf_May23\\Watch\\'
