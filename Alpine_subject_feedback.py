@@ -4,7 +4,7 @@ Created on Mon Dec 19 15:07:06 2022
 
 @author: Eric.Honert
 """
-
+#This code gives GPS data for ski for one subject at a time
 #______________________________________________________________________________
 # Import selected libraries here
 from fitparse import FitFile
@@ -13,13 +13,13 @@ import numpy as np
 import scipy.signal as sig
 import matplotlib.pyplot as plt
 import os
-import addcopyfighandler
+#import addcopyfighandler
 from tkinter.filedialog import askopenfilename
 
 
 # Read in file
 # To be changed.
-fPath = 'C:\\Users\\eric.honert\\Boa Technology Inc\\PFL Team - General\\Testing Segments\\Snow Performance\\SkiValidation_Dec2022\\GPS\\'
+fPath = 'Z\\Testing Segments\\Snow Performance\\SkiValidation_Dec2022\\GPS\\'
 filename = askopenfilename(initialdir = fPath) # Open .fit file
 # Preallocate
 TopSpeed = []
