@@ -5,6 +5,8 @@ Created on Thu Feb 10 06:21:37 2022
 @author: Eric.Honert
 """
 
+#This code gets GPS results for 1 participant at a time. Use when wanting to look just at one person's data
+
 #______________________________________________________________________________
 # Import selected libraries here
 from fitparse import FitFile
@@ -16,6 +18,9 @@ import os
 import time
 import addcopyfighandler
 from tkinter.filedialog import askopenfilename
+
+
+
 
 # Preallocate
 s1_time = []
