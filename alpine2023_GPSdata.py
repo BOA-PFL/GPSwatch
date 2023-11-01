@@ -4,7 +4,7 @@ Created on Mon Dec 19 15:07:06 2022
 
 @author: Eric.Honert
 """
-
+#This code converts fit files and combines all GPS outcomes (Top speed, avg speed, subject name, Trial number) into a csv
 #______________________________________________________________________________
 # Import selected libraries here
 from fitparse import FitFile
@@ -13,13 +13,13 @@ import numpy as np
 import scipy.signal as sig
 import matplotlib.pyplot as plt
 import os
-import addcopyfighandler
+#import addcopyfighandler
 from tkinter.filedialog import askopenfilename
 
 save_on = 1
 
 # Set the directory for the files
-fPath = 'C:\\Users\\eric.honert\\Boa Technology Inc\\PFL Team - General\\Testing Segments\\Snow Performance\\SkiValidation_Dec2022\\GPS\\'
+fPath = 'Z\\Testing Segments\\Snow Performance\\SkiValidation_Dec2022\\GPS\\'
 entries = [fName for fName in os.listdir(fPath) if fName.endswith('.fit')]
 
 trial_order = pd.read_excel(fPath + 'TrialOrder.xlsx')
