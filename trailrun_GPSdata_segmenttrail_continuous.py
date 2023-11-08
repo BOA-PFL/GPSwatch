@@ -4,27 +4,28 @@ Created on Thu Feb 10 06:21:37 2022
 
 @author: Eric.Honert
 """
-
+#This code converts .fit files and splits up the gps data into 3 separate events and saves the
+#time, average speed, average heart rate, average power, and end time for all the sections of the trail into one csv
 #______________________________________________________________________________
 # Import selected libraries here
 from fitparse import FitFile
 import pandas as pd
 import numpy as np
 from datetime import datetime
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import os
 import time
-import addcopyfighandler
+#import addcopyfighandler
 
 # Read in the .fit files
-fPath = 'C:\\Users\eric.honert\\Boa Technology Inc\\PFL Team - General\\Testing Segments\\EndurancePerformance\\EH_Trail_HeelLockTrail_Perf_May23\\Watch\\'
+fPath = 'Z:\\Testing Segments\\EndurancePerformance\\EH_Trail_HeelLockTrail_Perf_May23\\Watch\\'
 fileExt = r".fit"
 entries = [fName for fName in os.listdir(fPath) if fName.endswith(fileExt)]
 # Read in the qual sheet for the configuration names
-configs_df = pd.read_excel('C:\\Users\eric.honert\\Boa Technology Inc\\PFL Team - General\\Testing Segments\\EndurancePerformance\\EH_Trail_HeelLockTrail_Perf_May23\\Qual_EH_Trail_HeelLockTrail_Perf_May23.xlsx')
+configs_df = pd.read_excel('Z:\\Testing Segments\\EndurancePerformance\\EH_Trail_HeelLockTrail_Perf_May23\\Qual_EH_Trail_HeelLockTrail_Perf_May23.xlsx')
 config_no = len(np.unique(configs_df.Config))
 
-save_on = 1
+save_on = 1 #if you want to save the data make save_on=1, if not, change value
 
 
 # Preallocate Variables
