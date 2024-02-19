@@ -19,10 +19,10 @@ from tkinter.filedialog import askopenfilename
 save_on = 1
 
 # Set the directory for the files
-fPath = 'Z\\Testing Segments\\Snow Performance\\SkiValidation_Dec2022\\GPS\\'
+fPath = 'Z:\\Testing Segments\\Snow Performance\\EH_Alpine_FullBootVsShell_Jan2024\\GPS\\'
 entries = [fName for fName in os.listdir(fPath) if fName.endswith('.fit')]
 
-trial_order = pd.read_excel(fPath + 'TrialOrder.xlsx')
+trial_order = pd.read_excel(fPath + 'TrialOrder_2024.xlsx')
 
 
 # Preallocate
@@ -55,24 +55,34 @@ for ii in range(0,len(entries)):
             r[record_data.name] = record_data.value
         workout.append(r)
     df = pd.DataFrame(workout)
+    df.fillna(0)
     
     # Find the top of each run
-    peak_loc,peakheights = sig.find_peaks(df.altitude,height=3000)
+    peak_loc,peakheights = sig.find_peaks(df.altitude,height=3000,distance=500)
+    print(len(peak_loc))
     
     for count, jj in enumerate(peak_loc):
-        if sub_TO.iloc[0,count+1] != 'warmup':
-            # Look in a +/- 30 sec window range to find when the speed crosses 2 m/s
-            idx = df.speed[jj-30:jj+30] > 2
-            # Find where the subject is skiing
-            start_ski = np.where(idx==True)[0][0]+jj-30
-            idx = df.distance[start_ski:]-df.distance[start_ski] < 400 # Look at 400 m of skiing
-            ski_idx = np.where(idx==True)[0] + start_ski
-            TopSpeed.append(max(df.speed[ski_idx]))
-            AvgSpeed.append(np.mean(df.speed[ski_idx]))
-            sName.append(tmpSub)
-            cName.append(sub_TO.iloc[0,count+1])
+        try:
+            if sub_TO.iloc[0,count+1] != 'warmup':
+                # Look in a +/- 30 sec window range to find when the speed crosses 5 m/s
+                idx = df.vertical_speed[jj-45:jj+45] < -0.1 # change to vertical speed - double check
+                if sum(idx) == 0:
+                    # Increase search area
+                    idx = df.vertical_speed[jj-45:jj+480] < -0.1 # for trapper, stood at the top for a while
+                # Find where the subject is skiing
+                start_ski = np.where(idx==True)[0][0]+jj-45
+                idx = df.distance[start_ski:]-df.distance[start_ski] < 400 # Look at 400 m of skiing
+                ski_idx = np.where(idx==True)[0] + start_ski
+                TopSpeed.append(max(df.speed[ski_idx]))
+                AvgSpeed.append(np.mean(df.speed[ski_idx]))
+                sName.append(tmpSub)
+                cName.append(sub_TO.iloc[0,count+1])
+                TrialNo.append(count)
+        except:
+            print('Skipping a Run')
+                    
 
-outcomes = pd.DataFrame({'Subject':list(sName),'Config': list(cName),'TopSpeed':list(TopSpeed),'AvgSpeed':list(AvgSpeed)})
+outcomes = pd.DataFrame({'Subject':list(sName),'Config': list(cName),'trialNo': list(TrialNo),'TopSpeed':list(TopSpeed),'AvgSpeed':list(AvgSpeed)})
 
 if save_on == 1:
-    outcomes.to_csv(fPath + 'GPSOutcomes.csv',header=True)
+    outcomes.to_csv(fPath + '1_GPSOutcomes.csv',header=True)
