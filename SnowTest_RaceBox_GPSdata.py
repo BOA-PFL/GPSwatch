@@ -20,7 +20,7 @@ save_on = 1
 debug = 1
 
 # Set the directory for the files
-fPath = 'C:\\Users\\Kate.Harrison\\Boa Technology Inc\\PFL Team - General\\Testing Segments\\Snow Performance\\EH_Snowboard_BurtonWrap_Perf_Dec2024\\RaceBoxGPS\\'
+fPath = 'Z:\\Testing Segments\\Snow Performance\\2024\\EH_Snowboard_BurtonWrap_Perf_Dec2024\\RaceBoxGPS\\'
 entries = [fName for fName in os.listdir(fPath) if fName.endswith('.csv')]
 
 #trial_order = pd.read_excel(fPath + 'TrialOrder_2024.xlsx')
@@ -79,6 +79,15 @@ for ii in range(0,len(entries)):
                         plt.plot(gpsfile.Altitude)
                         plt.plot(start_ski, gpsfile.Altitude[start_ski], 'rx')
                         answer = messagebox.askyesno("Question","Is data clean?")
+                       
+                        saveFolder = fPath + 'AltitudePlots'
+                        
+                        if answer == True:
+                            if os.path.exists(saveFolder) == False:
+                                os.mkdir(saveFolder)  
+                            plt.savefig(saveFolder + '/' + entries[ii].split[0] + entries[ii].split(sep="_")[1]  +'.png')
+                         
+                       
                         plt.close()
                         if answer == False:
                             print('Adding file to bad file list')
